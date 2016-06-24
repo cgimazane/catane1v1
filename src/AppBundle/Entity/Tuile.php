@@ -17,6 +17,7 @@ class Tuile
 	const TYPE_PAILLE = 'paille';
 	const TYPE_MOUTON = 'mouton';
 	const TYPE_CAILLOU = 'caillou';
+	const TYPE_EAU = 'eau';
 	
 	
     /**
@@ -31,10 +32,25 @@ class Tuile
      */
     protected $type;
     
-	/**
- 	 * @ORM\OneToOne(targetEntity="Palet", cascade={"persist"})
-	 */
+    /**
+     * @ORM\Column(type="integer", name="x")
+     */
+    protected $x;
+    
+    /**
+     * @ORM\Column(type="integer", name="y")
+     */
+    protected $y;  
+    
+    /**
+     * @ORM\Column(type="integer", name="palet")
+     */
 	protected $palet;
 	
+	/**
+     * @ORM\ManyToOne(targetEntity="Partie")
+     * @ORM\JoinColumn(name="partie_id", referencedColumnName="id")
+     */
+    protected $partie;
       
 }

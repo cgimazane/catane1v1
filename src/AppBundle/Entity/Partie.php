@@ -35,6 +35,11 @@ class Partie
      */
     protected $secondPlayer;
     
+    /**
+     * @ORM\Column(type="boolean", name="turn")
+     */
+    protected $firstPlayerPlaying;
+    
     public function getId(){
 		return $this->id;
 	}

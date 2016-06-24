@@ -17,4 +17,11 @@ class Plateau
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+ 	 * @ORM\OneToOne(targetEntity="Partie", cascade={"persist"})
+	 */
+	protected $partie;
+	
+	
 }
