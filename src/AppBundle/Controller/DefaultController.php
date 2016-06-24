@@ -16,7 +16,7 @@ class DefaultController extends Controller
 	public function indexAction()
 	{
 		$partieRepository = $this->getDoctrine()->getRepository('AppBundle:Partie');
-		$parties = $repository->findAll();
+		$parties = $partieRepository->findAll();
 
 	return array( 'parties' => $parties );
 	}

@@ -18,6 +18,25 @@ class Partie
      */
     protected $id;
     
+    /**
+     * @ORM\Column(type="text", name="name", nullable=true)
+     */
+    protected $name;
+     
+    /**
+     * @ORM\ManyToOne(targetEntity="Joueur")
+     * @ORM\JoinColumn(name="joueur1_id", referencedColumnName="id")
+     */
+    protected $firstPlayer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Joueur")
+     * @ORM\JoinColumn(name="joueur2_id", referencedColumnName="id")
+     */
+    protected $secondPlayer;
     
+    public function getId(){
+		return $this->id;
+	}
     
 }

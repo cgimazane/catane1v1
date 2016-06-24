@@ -1,1 +1,14 @@
-OK
+<table>
+	<thead>
+		<tr>
+			<th>id</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for partie in parties %}
+		<tr>
+			<td>{{ partie.id }}</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
