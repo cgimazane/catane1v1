@@ -22,8 +22,6 @@ class Initiate {
 		//tuiles
 		$repartitionTuiles = $this->csvToArray($pathToData.'/tuiles.csv');
 		$tuiles = $this->getAndShuffle($repartitionTuiles);
-		
-		print_r($tuiles);
 				
 		//attention $plateau n'est pas un Plateau
 		$plateau = new ArrayCollection();

@@ -19,7 +19,7 @@ class Plateau
     protected $id;
     
     /**
- 	 * @ORM\OneToOne(targetEntity="Partie")
+ 	 * @ORM\OneToOne(targetEntity="Partie", inversedBy="Plateau")
  	 * @ORM\JoinColumn(name="partie_id", referencedColumnName="id")
 	 */
 	protected $partie;

@@ -19,7 +19,12 @@ class DefaultController extends Controller
 	{
 		$partieRepository = $this->getDoctrine()->getRepository('AppBundle:Partie');
 		$parties = $partieRepository->findAll();
-		
+
+		return array( 'parties' => $parties );
+	}
+	
+	public function newAction()
+	{
 		$repartitionTuiles = $this->container->get('app.initiate')->test();
 		
 		$em = $this->getDoctrine()->getManager();
@@ -34,7 +39,5 @@ class DefaultController extends Controller
 		$em->persist($plateau);
 
 		$em->flush();
-
-	return array( 'parties' => $parties );
 	}
 }

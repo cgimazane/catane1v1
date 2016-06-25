@@ -40,6 +40,11 @@ class Partie
      */
     protected $firstPlayerPlaying;
     
+    /**
+     * @ORM\OneToOne(targetEntity="Plateau", mappedBy="partie")
+     */
+    protected $plateau;
+    
     public function getId(){
 		return $this->id;
 	}
@@ -139,5 +144,29 @@ class Partie
     public function getSecondPlayer()
     {
         return $this->secondPlayer;
+    }
+
+    /**
+     * Set plateau
+     *
+     * @param \AppBundle\Entity\Plateau $plateau
+     *
+     * @return Partie
+     */
+    public function setPlateau(\AppBundle\Entity\Plateau $plateau = null)
+    {
+        $this->plateau = $plateau;
+
+        return $this;
+    }
+
+    /**
+     * Get plateau
+     *
+     * @return \AppBundle\Entity\Plateau
+     */
+    public function getPlateau()
+    {
+        return $this->plateau;
     }
 }
