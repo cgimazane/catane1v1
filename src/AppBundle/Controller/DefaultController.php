@@ -17,6 +17,8 @@ class DefaultController extends Controller
 	{
 		$partieRepository = $this->getDoctrine()->getRepository('AppBundle:Partie');
 		$parties = $partieRepository->findAll();
+		
+		$this->container->get('app.initiate')->test();
 
 	return array( 'parties' => $parties );
 	}
