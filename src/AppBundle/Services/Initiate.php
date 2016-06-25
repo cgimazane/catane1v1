@@ -2,6 +2,10 @@
 
 namespace AppBundle\Services;
 
+
+use AppBundle\Entity\Plateau as Plateau;
+use AppBundle\Entity\Tuile as Tuile;
+
 class Initiate {
 	
 	public function test(){
@@ -20,7 +24,10 @@ class Initiate {
 		$repartitionTuiles = $this->csvToArray($pathToData.'/tuiles.csv');
 		$tuiles = $this->getAndShuffle($repartitionTuiles);
 		
-
+		$plateau = new Plateau();
+		
+		
+		$tuile = new Tuile();
 		
 		print_r($tuiles);
 

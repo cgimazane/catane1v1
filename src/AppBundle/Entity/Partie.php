@@ -44,4 +44,100 @@ class Partie
 		return $this->id;
 	}
     
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Partie
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set firstPlayerPlaying
+     *
+     * @param boolean $firstPlayerPlaying
+     *
+     * @return Partie
+     */
+    public function setFirstPlayerPlaying($firstPlayerPlaying)
+    {
+        $this->firstPlayerPlaying = $firstPlayerPlaying;
+
+        return $this;
+    }
+
+    /**
+     * Get firstPlayerPlaying
+     *
+     * @return boolean
+     */
+    public function getFirstPlayerPlaying()
+    {
+        return $this->firstPlayerPlaying;
+    }
+
+    /**
+     * Set firstPlayer
+     *
+     * @param \AppBundle\Entity\Joueur $firstPlayer
+     *
+     * @return Partie
+     */
+    public function setFirstPlayer(\AppBundle\Entity\Joueur $firstPlayer = null)
+    {
+        $this->firstPlayer = $firstPlayer;
+
+        return $this;
+    }
+
+    /**
+     * Get firstPlayer
+     *
+     * @return \AppBundle\Entity\Joueur
+     */
+    public function getFirstPlayer()
+    {
+        return $this->firstPlayer;
+    }
+
+    /**
+     * Set secondPlayer
+     *
+     * @param \AppBundle\Entity\Joueur $secondPlayer
+     *
+     * @return Partie
+     */
+    public function setSecondPlayer(\AppBundle\Entity\Joueur $secondPlayer = null)
+    {
+        $this->secondPlayer = $secondPlayer;
+
+        return $this;
+    }
+
+    /**
+     * Get secondPlayer
+     *
+     * @return \AppBundle\Entity\Joueur
+     */
+    public function getSecondPlayer()
+    {
+        return $this->secondPlayer;
+    }
 }
