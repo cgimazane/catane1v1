@@ -22,12 +22,16 @@ class Initiate {
 		//tuiles
 		$repartitionTuiles = $this->csvToArray($pathToData.'/tuiles.csv');
 		$tuiles = $this->getAndShuffle($repartitionTuiles);
+		
+		print_r($tuiles);
 				
 		//attention $plateau n'est pas un Plateau
 		$plateau = new ArrayCollection();
 		
+		$compteurTuile = 0;
+		$compteurPalet = 0;
+		
 		foreach($cases as $case){
-			$compteurTuile = 0;
 			
 			$tuile = new Tuile();
 			$tuile->setX($case['x']);
@@ -38,8 +42,13 @@ class Initiate {
 				$tuile->setPalet(null);
 			}else{
 				$tuile->setType($tuiles[$compteurTuile]);
-				$tuile->setPalet($palets[$compteurTuile]);
-				
+				if($tuiles[$compteurTuile] == Tuile::TYPE_DESERT){
+					$tuile->setPalet(null);
+				}else{
+					$tuile->setPalet($palets[$compteurPalet]);
+					$compteurPalet++;
+				}
+						
 				$compteurTuile++;
 			}
 			$plateau->add($tuile);
