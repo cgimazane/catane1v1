@@ -2,8 +2,7 @@
 
 namespace AppBundle\Services;
 
-
-use AppBundle\Entity\Plateau as Plateau;
+use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 use AppBundle\Entity\Tuile as Tuile;
 
 class Initiate {
@@ -23,13 +22,30 @@ class Initiate {
 		//tuiles
 		$repartitionTuiles = $this->csvToArray($pathToData.'/tuiles.csv');
 		$tuiles = $this->getAndShuffle($repartitionTuiles);
+				
+		//attention $plateau n'est pas un Plateau
+		$plateau = new ArrayCollection();
 		
-		$plateau = new Plateau();
-		
-		
-		$tuile = new Tuile();
-		
-		print_r($tuiles);
+		foreach($cases as $case){
+			$compteurTuile = 0;
+			
+			$tuile = new Tuile();
+			$tuile->setX($case['x']);
+			$tuile->setY($case['y']);
+			
+			if($case['eau']){
+				$tuile->setType(Tuile::TYPE_EAU);
+				$tuile->setPalet(null);
+			}else{
+				$tuile->setType($tuiles[$compteurTuile]);
+				$tuile->setPalet($palets[$compteurTuile]);
+				
+				$compteurTuile++;
+			}
+			$plateau->add($tuile);
+		}
+
+	return $plateau;	
 
 	}
 	

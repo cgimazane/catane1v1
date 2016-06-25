@@ -43,7 +43,7 @@ class Tuile
     protected $y;  
     
     /**
-     * @ORM\Column(type="integer", name="palet")
+     * @ORM\Column(type="integer", name="palet", nullable=true)
      */
 	protected $palet;
 	
