@@ -45,6 +45,31 @@ class Partie
      */
     protected $plateau;
     
+    /**
+     * @ORM\Column(type="integer", name="stock_bois")
+     */
+    protected $stockBois;
+    
+    /**
+     * @ORM\Column(type="integer", name="stock_argile")
+     */
+    protected $stockArgile;
+    
+    /**
+     * @ORM\Column(type="integer", name="stock_mouton")
+     */
+    protected $stockMouton;
+    
+    /**
+     * @ORM\Column(type="integer", name="stock_paille")
+     */
+    protected $stockPaille;
+    
+    /**
+     * @ORM\Column(type="integer", name="stock_caillou")
+     */
+    protected $stockCaillou;
+    
     public function getId(){
 		return $this->id;
 	}
@@ -168,5 +193,125 @@ class Partie
     public function getPlateau()
     {
         return $this->plateau;
+    }
+
+    /**
+     * Set stockBois
+     *
+     * @param integer $stockBois
+     *
+     * @return Partie
+     */
+    public function setStockBois($stockBois)
+    {
+        $this->stockBois = $stockBois;
+
+        return $this;
+    }
+
+    /**
+     * Get stockBois
+     *
+     * @return integer
+     */
+    public function getStockBois()
+    {
+        return $this->stockBois;
+    }
+
+    /**
+     * Set stockArgile
+     *
+     * @param integer $stockArgile
+     *
+     * @return Partie
+     */
+    public function setStockArgile($stockArgile)
+    {
+        $this->stockArgile = $stockArgile;
+
+        return $this;
+    }
+
+    /**
+     * Get stockArgile
+     *
+     * @return integer
+     */
+    public function getStockArgile()
+    {
+        return $this->stockArgile;
+    }
+
+    /**
+     * Set stockMouton
+     *
+     * @param integer $stockMouton
+     *
+     * @return Partie
+     */
+    public function setStockMouton($stockMouton)
+    {
+        $this->stockMouton = $stockMouton;
+
+        return $this;
+    }
+
+    /**
+     * Get stockMouton
+     *
+     * @return integer
+     */
+    public function getStockMouton()
+    {
+        return $this->stockMouton;
+    }
+
+    /**
+     * Set stockPaille
+     *
+     * @param integer $stockPaille
+     *
+     * @return Partie
+     */
+    public function setStockPaille($stockPaille)
+    {
+        $this->stockPaille = $stockPaille;
+
+        return $this;
+    }
+
+    /**
+     * Get stockPaille
+     *
+     * @return integer
+     */
+    public function getStockPaille()
+    {
+        return $this->stockPaille;
+    }
+
+    /**
+     * Set stockCaillou
+     *
+     * @param integer $stockCaillou
+     *
+     * @return Partie
+     */
+    public function setStockCaillou($stockCaillou)
+    {
+        $this->stockCaillou = $stockCaillou;
+
+        return $this;
+    }
+
+    /**
+     * Get stockCaillou
+     *
+     * @return integer
+     */
+    public function getStockCaillou()
+    {
+        return $this->stockCaillou;
     }
 }
