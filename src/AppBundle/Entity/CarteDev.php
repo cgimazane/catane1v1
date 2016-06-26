@@ -32,6 +32,12 @@ class CarteDev {
     protected $partie;
     
     /**
+     * @ORM\ManyToOne(targetEntity="Joueur")
+     * @ORM\JoinColumn(name="joueur_id", referencedColumnName="id")
+     */
+    protected $joueur;
+    
+    /**
      * @ORM\Column(type="integer", name="position", nullable=true)
      */
 	protected $position;
@@ -121,5 +127,29 @@ class CarteDev {
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set joueur
+     *
+     * @param \AppBundle\Entity\Joueur $joueur
+     *
+     * @return CarteDev
+     */
+    public function setJoueur(\AppBundle\Entity\Joueur $joueur = null)
+    {
+        $this->joueur = $joueur;
+
+        return $this;
+    }
+
+    /**
+     * Get joueur
+     *
+     * @return \AppBundle\Entity\Joueur
+     */
+    public function getJoueur()
+    {
+        return $this->joueur;
     }
 }

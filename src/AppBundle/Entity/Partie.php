@@ -72,6 +72,11 @@ class Partie
      */
     protected $stockCaillou;
     
+    /**
+     * @ORM\Column(type="integer", name="next_carte_dev")
+     */
+    protected $nextCarteDev;
+    
     
     public function __construct(){
 		$this->stockBois = self::STOCK_MAX;
@@ -79,6 +84,8 @@ class Partie
 		$this->stockMouton = self::STOCK_MAX;
 		$this->stockPaille = self::STOCK_MAX;
 		$this->stockCaillou = self::STOCK_MAX;
+		
+		$this->nextCarteDev = 0;
 	}
     
     public function getId(){
@@ -324,5 +331,29 @@ class Partie
     public function getStockCaillou()
     {
         return $this->stockCaillou;
+    }
+
+    /**
+     * Set nextCarteDev
+     *
+     * @param integer $nextCarteDev
+     *
+     * @return Partie
+     */
+    public function setNextCarteDev($nextCarteDev)
+    {
+        $this->nextCarteDev = $nextCarteDev;
+
+        return $this;
+    }
+
+    /**
+     * Get nextCarteDev
+     *
+     * @return integer
+     */
+    public function getNextCarteDev()
+    {
+        return $this->nextCarteDev;
     }
 }

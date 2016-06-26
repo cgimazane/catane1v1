@@ -81,6 +81,10 @@ class DefaultController extends Controller
 	 */
 	public function playAction(Partie $partie){
 		
-		return array('partie' => $partie);
+		$carteDevRepository = $this->getDoctrine()->getRepository('AppBundle:CarteDev');
+		$carteDev = $carteDevRepository->findOneBy(array('partie' => $partie, 'position' => $partie->getNextCarteDev()));
+		
+		return array('partie' => $partie,
+						'carteDev' => $carteDev);
 	}
 }
