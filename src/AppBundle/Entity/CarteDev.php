@@ -27,7 +27,7 @@ class CarteDev {
     
     /**
      * @ORM\ManyToOne(targetEntity="Partie")
-     * @ORM\JoinColumn(name="ppartie_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="partie_id", referencedColumnName="id")
      */
     protected $partie;
     
@@ -35,6 +35,11 @@ class CarteDev {
      * @ORM\Column(type="integer", name="position", nullable=true)
      */
 	protected $position;
+	
+	/**
+     * @ORM\Column(type="text", name="type")
+     */
+    protected $type;
 
     /**
      * Get id
@@ -92,5 +97,29 @@ class CarteDev {
     public function getPartie()
     {
         return $this->partie;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return CarteDev
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

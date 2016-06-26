@@ -7,7 +7,7 @@ use AppBundle\Entity\Tuile as Tuile;
 
 class Initiate {
 	
-	public function test(){
+	public function createPlateau(){
 		
 		$pathToData = realpath(__DIR__.'/../Resources/data/');
 		
@@ -54,6 +54,16 @@ class Initiate {
 
 	return $plateau;	
 
+	}
+	
+	public function getCartesDev(){
+		$pathToData = realpath(__DIR__.'/../Resources/data/');
+
+		//cartes
+		$repartitionCartes = $this->csvToArray($pathToData.'/cartes_dev.csv');
+		$cartes = $this->getAndShuffle($repartitionCartes);
+		
+		return $cartes;
 	}
 	
 	private function csvToArray($filepath){

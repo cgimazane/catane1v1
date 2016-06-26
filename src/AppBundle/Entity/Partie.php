@@ -72,6 +72,15 @@ class Partie
      */
     protected $stockCaillou;
     
+    
+    public function __construct(){
+		$this->stockBois = self::STOCK_MAX;
+		$this->stockArgile = self::STOCK_MAX;
+		$this->stockMouton = self::STOCK_MAX;
+		$this->stockPaille = self::STOCK_MAX;
+		$this->stockCaillou = self::STOCK_MAX;
+	}
+    
     public function getId(){
 		return $this->id;
 	}

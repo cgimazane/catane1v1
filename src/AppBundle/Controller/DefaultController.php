@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use AppBundle\Entity\Partie as Partie;
+use AppBundle\Entity\CarteDev as CarteDev;
 use AppBundle\Entity\Plateau as Plateau;
 use AppBundle\Form\PartieType as PartieType;
 
@@ -38,7 +39,8 @@ class DefaultController extends Controller
 	
 		if ($form->isSubmitted() && $form->isValid()) {
 			
-			$repartitionTuiles = $this->container->get('app.initiate')->test();
+			$repartitionTuiles = $this->container->get('app.initiate')->createPlateau();
+			$repartitionCartesDev = $this->container->get('app.initiate')->getCartesDev();
 			
 			$em = $this->getDoctrine()->getManager();
 			
@@ -52,6 +54,14 @@ class DefaultController extends Controller
 			$plateau->setPartie($partie);
 
 			$em->persist($plateau);
+			
+			foreach ($repartitionCartesDev as $id => $carte){
+				$carteDev = new CarteDev();
+				$carteDev->setType($carte);
+				$carteDev->setPosition($id);
+				$carteDev->setPartie($partie);
+				$em->persist($carteDev);
+			}
 
 			$partie->setFirstPlayerPlaying(true);
 			
