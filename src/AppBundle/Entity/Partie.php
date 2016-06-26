@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Partie
 {
+	const STOCK_MAX = 19;
+	
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
