@@ -64,4 +64,13 @@ class DefaultController extends Controller
 
 		return array('form' => $form->createView());
 	}
+	
+	/**
+	 * @Route("/partie/{partie}", name="catane_partie")
+	 * @Template
+	 */
+	public function playAction(Partie $partie){
+		
+		return array('partie' => $partie);
+	}
 }

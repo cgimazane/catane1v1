@@ -19,7 +19,7 @@
 	{% for partie in parties %}
 		<tr>
 			<td>{{ partie.id }}</td>
-			<td>{{ partie.name }}</td>
+			<td><a href="{{ path('catane_partie',{ partie: partie.id }) }}">{{ partie.name }}</a></td>
 			<td>{{ partie.plateau.id }}</td>
 		</tr>
 	{% endfor %}
