@@ -7,12 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use AppBundle\Entity\Partie as Partie;
 use AppBundle\Entity\Plateau as Plateau;
+use AppBundle\Form\PartieType as PartieType;
 
 class DefaultController extends Controller
 {
 	/**
-	 * @Route("/", name="homepage")
+	 * @Route("/", name="catane_liste_parties")
 	 * @Template
 	 */
 	public function indexAction()
@@ -23,21 +25,43 @@ class DefaultController extends Controller
 		return array( 'parties' => $parties );
 	}
 	
-	public function newAction()
+	/**
+	 * @Route("/new", name="catane_nouvelle_partie")
+	 * @Template
+ 	 */
+	public function newAction(Request $request)
 	{
-		$repartitionTuiles = $this->container->get('app.initiate')->test();
+		$partie = new Partie();
+		$form = $this->createForm(PartieType::class, $partie);
 		
-		$em = $this->getDoctrine()->getManager();
-		
-		$plateau = new Plateau();
-		
-		foreach ($repartitionTuiles as $tuile){
-			$tuile->setPlateau($plateau);
-			$em->persist($tuile);
+		$form->handleRequest($request);
+	
+		if ($form->isSubmitted() && $form->isValid()) {
+			
+			$repartitionTuiles = $this->container->get('app.initiate')->test();
+			
+			$em = $this->getDoctrine()->getManager();
+			
+			$plateau = new Plateau();
+			
+			foreach ($repartitionTuiles as $tuile){
+				$tuile->setPlateau($plateau);
+				$em->persist($tuile);
+			}
+			
+			$plateau->setPartie($partie);
+
+			$em->persist($plateau);
+
+			$partie->setFirstPlayerPlaying(true);
+			
+			$em->persist($partie);
+
+			$em->flush();
+			
+			return $this->redirectToRoute('catane_liste_parties');
 		}
 
-		$em->persist($plateau);
-
-		$em->flush();
+		return array('form' => $form->createView());
 	}
 }

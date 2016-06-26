@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<h1>Liste des joueurs</h1>
+
+<a href="{{ path('catane_liste_parties') }}">Liste des parties</a>
+
+<table>
+	<thead>
+		<tr>
+			<th>id</th>
+			<th>nom</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for joueur in joueurs %}
+		<tr>
+			<td>{{ joueur.id }}</td>
+			<td>{{ joueur.username }}</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+
+
+{% endblock %}
+

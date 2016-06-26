@@ -1,58 +1,31 @@
+{% extends 'base.html.twig' %}
 {% block body %}
+
+<h1>Liste des parties</h1>
+
+<a href="{{ path('catane_nouvelle_partie') }}">Nouvelle partie</a>
+<a href="{{ path('catane_liste_joueurs') }}">Liste des joueurs</a>
+
 
 <table>
 	<thead>
 		<tr>
-			<th>x</th>
-			<th>y</th>
-			<th>type</th>
+			<th>id</th>
+			<th>nom</th>
+			<th>plateau</th>
 		</tr>
 	</thead>
 	<tbody>
 	{% for partie in parties %}
-		{% for tuile in partie.plateau.tuiles %}
 		<tr>
-			<td>{{ tuile.x }}</td>
-			<td>{{ tuile.y }}</td>
-			<td>{{ tuile.type }}</td>
+			<td>{{ partie.id }}</td>
+			<td>{{ partie.name }}</td>
+			<td>{{ partie.plateau.id }}</td>
 		</tr>
-		{% endfor %}
 	{% endfor %}
 	</tbody>
 </table>
 
-<style>
-  .eau {
-     fill  : blue;
-  }
-    .desert {
-     fill  : black;
-  }
-    .argile {
-     fill  : orange;
-  }
-    .mouton {
-     fill  : green;
-  }
-    .pierre {
-     fill  : grey;
-  }
-    .paille {
-     fill  : yellow;
-  }
-    .bois {
-     fill  : #582900;
-  }
-  
-</style>
-
-<svg width="5000" height="5000">
-	{% for partie in parties %}
-		{% for tuile in partie.plateau.tuiles %}
-			<circle cx="{{ tuile.x }}" cy="{{ tuile.y }}" r="5" class="{{ tuile.type }}" /> 
-		{% endfor %}
-{% endfor %}
-</svg>
 
 {% endblock %}
 
