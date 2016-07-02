@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class PartieType extends AbstractType
@@ -14,6 +15,9 @@ class PartieType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('secondPlayerId',IntegerType::class,array(
+				'mapped' => false
+			))
             ->add('save', SubmitType::class, array('label' => 'Créer partie'))
             
         ;

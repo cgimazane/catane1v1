@@ -32,10 +32,15 @@ class CarteDev {
     protected $partie;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Joueur")
-     * @ORM\JoinColumn(name="joueur_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Reserve", inversedBy="cartesDev")
+     * @ORM\JoinColumn(name="reserve_id", referencedColumnName="id")
      */
-    protected $joueur;
+    protected $reserve;
+    
+    /**
+     * @ORM\Column(type="boolean", name="played", nullable=true)
+     */
+    protected $played = false;
     
     /**
      * @ORM\Column(type="integer", name="position", nullable=true)
@@ -130,26 +135,50 @@ class CarteDev {
     }
 
     /**
-     * Set joueur
+     * Set played
      *
-     * @param \AppBundle\Entity\Joueur $joueur
+     * @param boolean $played
      *
      * @return CarteDev
      */
-    public function setJoueur(\AppBundle\Entity\Joueur $joueur = null)
+    public function setPlayed($played)
     {
-        $this->joueur = $joueur;
+        $this->played = $played;
 
         return $this;
     }
 
     /**
-     * Get joueur
+     * Get played
      *
-     * @return \AppBundle\Entity\Joueur
+     * @return boolean
      */
-    public function getJoueur()
+    public function getPlayed()
     {
-        return $this->joueur;
+        return $this->played;
+    }
+
+    /**
+     * Set reserve
+     *
+     * @param \AppBundle\Entity\Reserve $reserve
+     *
+     * @return CarteDev
+     */
+    public function setReserve(\AppBundle\Entity\Reserve $reserve = null)
+    {
+        $this->reserve = $reserve;
+
+        return $this;
+    }
+
+    /**
+     * Get reserve
+     *
+     * @return \AppBundle\Entity\Reserve
+     */
+    public function getReserve()
+    {
+        return $this->reserve;
     }
 }

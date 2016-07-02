@@ -13,6 +13,8 @@
 			<th>id</th>
 			<th>nom</th>
 			<th>plateau</th>
+			<th>joueur 1</th>
+			<th>joueur 2</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -21,6 +23,8 @@
 			<td>{{ partie.id }}</td>
 			<td><a href="{{ path('catane_partie',{ partie: partie.id }) }}">{{ partie.name }}</a></td>
 			<td>{{ partie.plateau.id }}</td>
+			<td>{{ partie.firstPlayer.username }}</td>
+			<td>{{ partie.secondPlayer.username }}</td>
 		</tr>
 	{% endfor %}
 	</tbody>

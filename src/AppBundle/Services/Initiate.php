@@ -4,6 +4,7 @@ namespace AppBundle\Services;
 
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 use AppBundle\Entity\Tuile as Tuile;
+use AppBundle\Entity\Route as Route;
 
 class Initiate {
 	
@@ -12,6 +13,9 @@ class Initiate {
 		$pathToData = realpath(__DIR__.'/../Resources/data/');
 		
 		//data to array
+		//spots
+		$spots = $this->csvToArray($pathToData.'/spots.csv');
+		
 		//cases
 		$cases = $this->csvToArray($pathToData.'/cases.csv');
 		
@@ -22,19 +26,21 @@ class Initiate {
 		//tuiles
 		$repartitionTuiles = $this->csvToArray($pathToData.'/tuiles.csv');
 		$tuiles = $this->getAndShuffle($repartitionTuiles);
-				
-		//attention $plateau n'est pas un Plateau
-		$plateau = new ArrayCollection();
-		
+						
 		$compteurTuile = 0;
 		$compteurPalet = 0;
 		
+		$tuilesResults = new ArrayCollection();
+		$voisins = array();
+		
 		foreach($cases as $case){
-			
+			//creation de la tuile
 			$tuile = new Tuile();
 			$tuile->setX($case['x']);
 			$tuile->setY($case['y']);
+			$tuile->setPlateauLocation($case['id']);
 			
+			//type de tuile
 			if($case['eau']){
 				$tuile->setType(Tuile::TYPE_EAU);
 				$tuile->setPalet(null);
@@ -49,8 +55,17 @@ class Initiate {
 						
 				$compteurTuile++;
 			}
-			$plateau->add($tuile);
+			$tuilesResults->set($case['id'],$tuile);
+			
+			//creation des routes
+			$voisins[$case['id']] = explode(';',$case['voisins']);
 		}
+				
+		//attention $plateau n'est pas un Plateau
+		$plateau = new ArrayCollection();
+		$plateau->set('tuiles',$tuilesResults);
+		$plateau->set('voisins',$voisins);
+		$plateau->set('spots',$spots);
 
 	return $plateau;	
 
@@ -70,7 +85,6 @@ class Initiate {
 		$csv = array_map("str_getcsv", file($filepath,FILE_SKIP_EMPTY_LINES));
 		$keys = array_shift($csv);
 		
-
 		foreach ($csv as $i=>$row) {
 			$csv[$i] = array_combine($keys, $row);
 		}

@@ -188,6 +188,14 @@ class Partie
     {
         return $this->secondPlayer;
     }
+    
+    public function getOtherPlayer(\AppBundle\Entity\Joueur $joueur){
+		if ($joueur->getId() == $this->getFirstPlayer()->getId()){
+			return $this->secondPlayer;
+		}else{
+			return $this->firstPlayer;
+		}
+	}
 
     /**
      * Set plateau

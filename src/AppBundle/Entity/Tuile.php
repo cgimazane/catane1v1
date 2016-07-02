@@ -40,7 +40,7 @@ class Tuile
     /**
      * @ORM\Column(type="integer", name="y")
      */
-    protected $y;  
+    protected $y;   
     
     /**
      * @ORM\Column(type="integer", name="palet", nullable=true)
@@ -48,11 +48,31 @@ class Tuile
 	protected $palet;
 	
 	/**
-     * @ORM\ManyToOne(targetEntity="Plateau", inversedBy="tuiles")
+     * @ORM\ManyToOne(targetEntity="Plateau", inversedBy="tuiles", cascade={"persist"})
      * @ORM\JoinColumn(name="plateau_id", referencedColumnName="id")
      */
     protected $plateau;
+    
+    /**
+     * @ORM\Column(type="integer", name="plateau_location")
+     */
+    protected $plateauLocation;  
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Route", inversedBy="tuiles")
+     * @ORM\JoinTable(name="tuiles_routes")
+     */
+    protected $routes;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Spot", inversedBy="tuiles")
+     * @ORM\JoinTable(name="spots_tuiles")
+     */
+    protected $spots;
       
+    public function __construct() {
+        $this->routes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -182,5 +202,121 @@ class Tuile
     public function getPlateau()
     {
         return $this->plateau;
+    }
+
+    /**
+     * Set plateauId
+     *
+     * @param integer $plateauId
+     *
+     * @return Tuile
+     */
+    public function setPlateauId($plateauId)
+    {
+        $this->plateauId = $plateauId;
+
+        return $this;
+    }
+
+    /**
+     * Get plateauId
+     *
+     * @return integer
+     */
+    public function getPlateauId()
+    {
+        return $this->plateauId;
+    }
+
+    /**
+     * Set plateauLocation
+     *
+     * @param integer $plateauLocation
+     *
+     * @return Tuile
+     */
+    public function setPlateauLocation($plateauLocation)
+    {
+        $this->plateauLocation = $plateauLocation;
+
+        return $this;
+    }
+
+    /**
+     * Get plateauLocation
+     *
+     * @return integer
+     */
+    public function getPlateauLocation()
+    {
+        return $this->plateauLocation;
+    }
+
+    /**
+     * Add route
+     *
+     * @param \AppBundle\Entity\Route $route
+     *
+     * @return Tuile
+     */
+    public function addRoute(\AppBundle\Entity\Route $route)
+    {
+        $this->routes[] = $route;
+
+        return $this;
+    }
+
+    /**
+     * Remove route
+     *
+     * @param \AppBundle\Entity\Route $route
+     */
+    public function removeRoute(\AppBundle\Entity\Route $route)
+    {
+        $this->routes->removeElement($route);
+    }
+
+    /**
+     * Get routes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRoutes()
+    {
+        return $this->routes;
+    }
+
+    /**
+     * Add spot
+     *
+     * @param \AppBundle\Entity\Spot $spot
+     *
+     * @return Tuile
+     */
+    public function addSpot(\AppBundle\Entity\Spot $spot)
+    {
+        $this->spots[] = $spot;
+
+        return $this;
+    }
+
+    /**
+     * Remove spot
+     *
+     * @param \AppBundle\Entity\Spot $spot
+     */
+    public function removeSpot(\AppBundle\Entity\Spot $spot)
+    {
+        $this->spots->removeElement($spot);
+    }
+
+    /**
+     * Get spots
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSpots()
+    {
+        return $this->spots;
     }
 }

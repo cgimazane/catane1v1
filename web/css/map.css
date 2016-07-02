@@ -6,24 +6,16 @@ fill  : black;
 }
 .argile {
 fill  : #D7761E;
-stroke : #776159;
-stroke-width : 3;
 }
 .mouton {
 fill  : #9BC348;
-stroke : white;
-stroke-width : 3;
 }
 .caillou {
 fill  : #5D5552;
-stroke : white;
-stroke-width : 3;
 }
 .paille {
 fill  : yellow;
 }
 .bois {
-fill: #3F6A00;
-stroke  : #582900;
-stroke-width : 3;
+fill: #3F6A00;;
 }

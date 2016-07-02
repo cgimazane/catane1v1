@@ -28,9 +28,21 @@ class Plateau
      * @ORM\OneToMany(targetEntity="Tuile", mappedBy="plateau")
      */
      protected $tuiles;
+     
+    /**
+     * @ORM\OneToMany(targetEntity="Route", mappedBy="plateau")
+     */
+     protected $routes;
+     
+    /**
+     * @ORM\OneToMany(targetEntity="Spot", mappedBy="plateau")
+     */
+     protected $spots;
 	
 	 public function __construct() {
         $this->tuiles = new ArrayCollection();
+        $this->routes = new ArrayCollection();
+        $this->spots = new ArrayCollection();
      }
 
     /**
@@ -99,5 +111,73 @@ class Plateau
     public function getTuiles()
     {
         return $this->tuiles;
+    }
+
+    /**
+     * Add route
+     *
+     * @param \AppBundle\Entity\Route $route
+     *
+     * @return Plateau
+     */
+    public function addRoute(\AppBundle\Entity\Route $route)
+    {
+        $this->routes[] = $route;
+
+        return $this;
+    }
+
+    /**
+     * Remove route
+     *
+     * @param \AppBundle\Entity\Route $route
+     */
+    public function removeRoute(\AppBundle\Entity\Route $route)
+    {
+        $this->routes->removeElement($route);
+    }
+
+    /**
+     * Get routes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRoutes()
+    {
+        return $this->routes;
+    }
+
+    /**
+     * Add spot
+     *
+     * @param \AppBundle\Entity\Spot $spot
+     *
+     * @return Plateau
+     */
+    public function addSpot(\AppBundle\Entity\Spot $spot)
+    {
+        $this->spots[] = $spot;
+
+        return $this;
+    }
+
+    /**
+     * Remove spot
+     *
+     * @param \AppBundle\Entity\Spot $spot
+     */
+    public function removeSpot(\AppBundle\Entity\Spot $spot)
+    {
+        $this->spots->removeElement($spot);
+    }
+
+    /**
+     * Get spots
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSpots()
+    {
+        return $this->spots;
     }
 }
