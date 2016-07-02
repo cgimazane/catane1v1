@@ -77,6 +77,11 @@ class Partie
      */
     protected $nextCarteDev;
     
+    /**
+     * @ORM\Column(type="boolean", name="started")
+     */
+    protected $started;
+    
     
     public function __construct(){
 		$this->stockBois = self::STOCK_MAX;
@@ -86,6 +91,7 @@ class Partie
 		$this->stockCaillou = self::STOCK_MAX;
 		
 		$this->nextCarteDev = 0;
+		$this->started = false;
 	}
     
     public function getId(){
@@ -363,5 +369,29 @@ class Partie
     public function getNextCarteDev()
     {
         return $this->nextCarteDev;
+    }
+
+    /**
+     * Set started
+     *
+     * @param boolean $started
+     *
+     * @return Partie
+     */
+    public function setStarted($started)
+    {
+        $this->started = $started;
+
+        return $this;
+    }
+
+    /**
+     * Get started
+     *
+     * @return boolean
+     */
+    public function getStarted()
+    {
+        return $this->started;
     }
 }

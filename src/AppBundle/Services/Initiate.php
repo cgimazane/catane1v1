@@ -13,6 +13,10 @@ class Initiate {
 		$pathToData = realpath(__DIR__.'/../Resources/data/');
 		
 		//data to array
+		//ports
+		$repartitionPorts = $this->csvToArray($pathToData.'/ports.csv');
+		$ports = $this->getAndShuffle($repartitionPorts);
+		
 		//spots
 		$spots = $this->csvToArray($pathToData.'/spots.csv');
 		
@@ -33,6 +37,8 @@ class Initiate {
 		$tuilesResults = new ArrayCollection();
 		$voisins = array();
 		
+		$tuilesAvecPort = array();
+		
 		foreach($cases as $case){
 			//creation de la tuile
 			$tuile = new Tuile();
@@ -44,6 +50,7 @@ class Initiate {
 			if($case['eau']){
 				$tuile->setType(Tuile::TYPE_EAU);
 				$tuile->setPalet(null);
+				$tuilesAvecPort[] = $case['id'];
 			}else{
 				$tuile->setType($tuiles[$compteurTuile]);
 				if($tuiles[$compteurTuile] == Tuile::TYPE_DESERT){
@@ -66,6 +73,18 @@ class Initiate {
 		$plateau->set('tuiles',$tuilesResults);
 		$plateau->set('voisins',$voisins);
 		$plateau->set('spots',$spots);
+		
+		//selection des tuiles à ports
+		
+		shuffle($tuilesAvecPort);
+		
+		$resultPorts = array_combine(array_slice($tuilesAvecPort,0,sizeof($tuilesAvecPort)/2),$ports);
+		
+		foreach ($resultPorts as $key => $value){			
+			$resultPorts[$key] = array('type' => $value,'quantité'=>2);;
+		}
+		
+		$plateau->set('ports',$resultPorts);
 
 	return $plateau;	
 

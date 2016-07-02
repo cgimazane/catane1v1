@@ -31,6 +31,16 @@ class DefaultController extends Controller
 	}
 	
 	/**
+	 * @Route("/init/{partie}", name="catane_partie_init")
+	 * @Template
+	 */
+	public function initAction(Partie $partie)
+	{	
+
+		return array( 'partie' => $partie );
+	}
+	
+	/**
 	 * @Route("/new", name="catane_nouvelle_partie")
 	 * @Template
  	 */

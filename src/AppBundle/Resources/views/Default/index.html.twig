@@ -15,6 +15,7 @@
 			<th>plateau</th>
 			<th>joueur 1</th>
 			<th>joueur 2</th>
+			<th>init</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -25,6 +26,7 @@
 			<td>{{ partie.plateau.id }}</td>
 			<td>{{ partie.firstPlayer.username }}</td>
 			<td>{{ partie.secondPlayer.username }}</td>
+			<td>{% if not partie.started %}<a href="{{ path('catane_partie_init',{ partie: partie.id }) }}">init</a>{% endif %}</td>
 		</tr>
 	{% endfor %}
 	</tbody>
